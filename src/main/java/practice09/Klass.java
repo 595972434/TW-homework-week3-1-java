@@ -1,7 +1,5 @@
 package practice09;
 
-import java.io.PrintStream;
-
 public class Klass {
     public int number;
     public Student leader;
