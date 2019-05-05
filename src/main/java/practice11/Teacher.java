@@ -1,12 +1,18 @@
 package practice11;
 
 import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Teacher extends Person{
+
+public class Teacher extends Person implements Observer {
     public LinkedList<Klass> classes;
     public Teacher(int k, String tom, int i, LinkedList<Klass> j) {
         super(k,tom,i);
         classes=j;
+        for(int n=0;n<classes.size();n++){
+            classes.get(n).attach(this);
+        }
     }
     public Teacher(int k,String tom, int i) {
         super(k,tom,i);
@@ -15,6 +21,8 @@ public class Teacher extends Person{
     public LinkedList<Klass> getClasses() {
         return classes;
     }
+
+    @Override
     public String introduce() {
         if(classes.size()==0){
             return super.introduce()+" I am a Teacher. I teach No Class.";
@@ -44,5 +52,10 @@ public class Teacher extends Person{
             }
         }
         return false;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.print("I am "+this.name+arg);
     }
 }
